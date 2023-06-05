@@ -55,13 +55,15 @@ class LoginController: UIViewController {
     
     @IBAction func autorizationAction(_ sender: Any) {
         let aut =  LocalAutorizationService()
-        aut.authorizeIfPossible { bool in
+
+        aut.authorizeIfPossible { bool  in
             DispatchQueue.main.async {
                 if bool{
                     self.autorizationLabel.text = "Авторизация прошла успшено"
                 } else {
 
-                    self.autorizationLabel.text = "Авторизация не пройдена"
+                    self.autorizationLabel.text = aut.error?.localizedDescription
+
                 }
             }
         }
